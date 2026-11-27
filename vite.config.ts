@@ -13,7 +13,20 @@ export default defineConfig(({ mode }) => {
     plugins: [react(), tailwindcss()],
 
     build: {
-      chunkSizeWarningLimit: 1000,
+      chunkSizeWarningLimit: 900,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (!id.includes('node_modules')) return;
+            if (id.includes('three') || id.includes('@react-three')) return 'three';
+            if (id.includes('fabric') || id.includes('konva') || id.includes('pixi')) return 'canvas';
+            if (id.includes('lottie')) return 'lottie';
+            if (id.includes('motion') || id.includes('gsap') || id.includes('@react-spring')) return 'motion';
+            if (id.includes('lucide')) return 'icons';
+            if (id.includes('react') || id.includes('scheduler')) return 'react';
+          },
+        },
+      },
     },
 
     resolve: {

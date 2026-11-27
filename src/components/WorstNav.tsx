@@ -22,7 +22,7 @@ const NAV_ITEMS: { id: PageType; label: string; sub: string }[] = [
   { id: 'support', label: 'Support', sub: '06' },
   { id: 'unsubscribe', label: 'Unsubscribe', sub: '07' },
   { id: 'records', label: 'Guinness hall', sub: '08' },
-  { id: 'polyglot', label: 'Polyglot', sub: '09' },
+  { id: 'polyglot', label: 'Tools + games', sub: '09' },
 ];
 
 export const WorstNav: React.FC<WorstNavProps> = ({

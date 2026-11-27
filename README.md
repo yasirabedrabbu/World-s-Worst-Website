@@ -12,6 +12,7 @@ A satirical React + TypeScript web app that intentionally recreates the **worst 
 - **🛒 Worst Store** — Predatory e-commerce patterns: hidden fees, fake urgency, and confusing checkout flows.
 - **📌 Worst Pinterest** — A cursed pinboard experience.
 - **🍪 Cookie Nightmare Modal**, **Fake CAPTCHA**, **Low Battery Panic**, **Inactivity Alerts**, **Pop-up Ad Swarm** — classic hostile web patterns, reimagined.
+- **🧪 Polyglot Tools Wing** — A modern, filterable arcade of nine live toys: 60/30/10 **Palette Forge**, **Museum Settings** (live CSS-variable customisation), **Regex Surgery**, **JSON Forge**, a real **Python Text Autopsy** bridge, **Sort Race**, a canvas **Snake** game, **Strict Typing** quiz, and a **Polyglot Codex** with runnable Java, Python, Rust, C, C# and JavaScript specimens.
 - **🎮 Gamification System** — XP, achievements, and a floating HUD that rewards you for surviving the chaos.
 - **🌀 Chaos Mode** — A random 30% chance to invert your actions, just to keep you on your toes.
 - **🇧🇩 Bilingual (Bangla/English)** hostile warning modal and viral news section.
@@ -20,27 +21,51 @@ A satirical React + TypeScript web app that intentionally recreates the **worst 
 
 ## 🛠️ Tech Stack
 
-- **React** + **TypeScript**
-- **Tailwind CSS** (comic/retro styling with hard drop shadows)
-- **motion/react** (animations)
+- **React** + **TypeScript**, lazy-loaded routes and manual vendor chunks
+- **Tailwind CSS v4** + a strict 60 / 30 / 10 colour system
+- **motion/react**, GSAP, CSS keyframes and canvas animation
 - **lucide-react** (icons)
-- Custom hooks (`useHeaderScramble`, `useGsapScrollTrigger`) and utilities (`audioSynth`) for the immersive chaos
+- **Python** server bridge (`tools/py_analyze.py`) with a JavaScript fallback
+- **Runnable specimens**: Java (`tools/ByteForge.java`), Rust (`tools/entropy.rs`), C (`tools/hexdump.c`), C# (`tools/Badge.cs`), JS (`tools/palette.mjs`)
+
+## 🧰 Polyglot toolbelt
+
+| Tool | Runtime | What it does |
+| --- | --- | --- |
+| Palette Forge | JavaScript | Generates and applies a 60/30/10 palette |
+| Museum Settings | CSS vars | Radius, font size, animation energy, grain — persisted |
+| Regex Surgery | RegExp | Live match highlighting and presets |
+| JSON Forge | JavaScript | Validate, beautify, minify, copy |
+| Text Autopsy | Python + JS | Entropy, vocabulary and reading time |
+| Sort Race | JavaScript | Animated bubble vs insertion race |
+| Snake | Canvas | Keyboard + touch game with best score |
+| Strict Typing | JavaScript | Language quiz with streaks and XP |
+| Polyglot Codex | Java/Rust/C/C#/Py/JS | Source specimens and simulated output |
+
+Every new module in `src/components/polyglot/`, `src/data/`, `src/styles/` and `tools/` is **≤ 200 lines**.
 
 ## 📂 Project Structure
 
 ```
 src/
 ├── App.tsx                    # Main app shell, navigation, and global state
-├── components/                # Shared UI: modals, nav, popups, gamification, etc.
+├── components/
+│   ├── polyglot/              # ToolShell, PaletteForge, RegexLab, JsonForge, games...
+│   ├── museum/                # Exhibit, MuseumHero, MuseumFooter
+│   └── ...                    # Shared UI: modals, nav, popups, gamification
 ├── pages/
+│   ├── PolyglotTools.tsx      # Nine-tool polyglot arcade
 │   ├── WorstStore.tsx
 │   ├── WorstSupport.tsx
 │   ├── WorstUnsubscribe.tsx
 │   ├── WorstRecords.tsx
 │   └── WorstPinterest.tsx
-├── hooks/                     # useHeaderScramble, useGsapScrollTrigger, etc.
-├── utils/                     # audioSynth and other helpers
-└── types.ts                   # Shared types (PageType, PopupAd, FrustrationStats, ...)
+├── data/                      # Achievement + polyglot sample data
+├── styles/                    # Polyglot tool/lab stylesheets
+├── hooks/                     # useHeaderScramble, useGsapScrollTrigger, useMuseumMotion
+├── utils/                     # audioSynth, presenceClient
+└── types.ts                   # Shared types
+tools/                         # Runnable Java, Python, Rust, C, C#, JS specimens
 ```
 
 ## 🚀 Getting Started

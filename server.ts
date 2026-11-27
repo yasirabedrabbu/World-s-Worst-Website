@@ -136,6 +136,22 @@ print(json.dumps({"version": sys.version.split()[0], "output": random.choice(exc
     }
   });
 
+  // ---------- TEXT AUTOPSY: fixed Python script, JSON in / JSON out ----------
+  app.post('/api/tools/py-analyze', async (req, res) => {
+    const text = typeof req.body?.text === 'string' ? req.body.text.slice(0, 20000) : '';
+    if (!text.trim()) {
+      res.status(400).json({ error: 'No text provided' });
+      return;
+    }
+    try {
+      const enginePath = path.join(process.cwd(), 'tools', 'py_analyze.py');
+      const raw = await runPython([enginePath], JSON.stringify({ text }), 15000);
+      res.json(JSON.parse(raw.trim().split('\n').pop() || '{}'));
+    } catch (e) {
+      res.status(500).json({ error: (e as Error).message });
+    }
+  });
+
   // ---------- PRESENCE (SSE) ----------
   app.get('/api/presence/stream', (req, res) => {
     const userId =

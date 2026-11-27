@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { WorstNav } from './components/WorstNav';
 import { MarqueeBanner } from './components/MarqueeBanner';
@@ -42,107 +42,16 @@ import { GamificationShowcaseSection } from './components/GamificationShowcaseSe
 import { GamificationFloatingHud } from './components/GamificationFloatingHud';
 import { LiveUserCounter } from './components/LiveUserCounter';
 import { MultiUserCursors } from './components/MultiUserCursors';
-import { HalftoneStudio } from './components/HalftoneStudio';
-import { presenceManager } from './utils/presenceClient';
-import { PolyglotChaosLab } from './components/PolyglotChaosLab';
 import { BrowserTortureKit } from './components/BrowserTortureKit';
+import { presenceManager } from './utils/presenceClient';
+const PolyglotTools = lazy(() => import('./pages/PolyglotTools').then((m) => ({ default: m.PolyglotTools })));
+const HalftoneStudio = lazy(() => import('./components/HalftoneStudio').then((m) => ({ default: m.HalftoneStudio })));
 import { Exhibit } from './components/museum/Exhibit';
 import { MuseumHero } from './components/museum/MuseumHero';
 import { MuseumFooter } from './components/museum/MuseumFooter';
 import { useMuseumMotion } from './hooks/useMuseumMotion';
 
-const INITIAL_ACHIEVEMENTS: Achievement[] = [
-  {
-    id: 'ach-warning',
-    title: 'Warning Defier',
-    titleBn: 'সতর্কবার্তা অগ্রাহ্যকারী',
-    desc: 'Braved the bilingual Bangla/English hostile website warning.',
-    descBn: 'বাংলা ও ইংরেজি চরম সতর্কবার্তা পড়েও সাইটে ঢুকেছেন।',
-    icon: '⚠️',
-    xpReward: 30,
-    isUnlocked: true,
-  },
-  {
-    id: 'ach-horror',
-    title: '24-Bit Horror Survivor',
-    titleBn: '২৪-বিট হরর সারভাইভার',
-    desc: 'Endured acoustic terror from the 24-bit sound lab.',
-    descBn: '২৪-বিট সাইকোঅ্যাকোস্টিক হরর সাউন্ড ট্রাই করে বেঁচে ফিরেছেন।',
-    icon: '👻',
-    xpReward: 35,
-    isUnlocked: false,
-  },
-  {
-    id: 'ach-viral',
-    title: 'BD Viral Connoisseur',
-    titleBn: 'বাংলাদেশি ভাইরাল বিশেষজ্ঞ',
-    desc: 'Explored Bangladesh viral news, kacchi biryani war, and reacted to satire.',
-    descBn: 'বাংলাদেশি ভাইরাল নিউজ, কাচ্চির রণক্ষেত্র ও পদ্মা সেতুর সেলফি গ্যাং এক্সপ্লোর করেছেন।',
-    icon: '🇧🇩',
-    xpReward: 40,
-    isUnlocked: false,
-  },
-  {
-    id: 'ach-rabbu-mail',
-    title: 'Direct Line to Rabbu',
-    titleBn: 'রাব্বুর ইনবক্স দূত',
-    desc: 'Sent an honest opinion directly to the creator official inbox.',
-    descBn: 'সরাসরি ক্রিয়েটরের অফিসিয়াল ইনবক্সে নিজের মতামত বা ক্ষোভ পাঠিয়েছেন।',
-    icon: '✉️',
-    xpReward: 50,
-    isUnlocked: false,
-  },
-  {
-    id: 'ach-terminal',
-    title: 'Kernel Cyber Wizard',
-    titleBn: 'টার্মিনাল সাইবার জাদুকর',
-    desc: 'Executed commands in the hostile bash hybrid terminal.',
-    descBn: 'টার্মিনালে শেল কমান্ড চালিয়ে ওয়েবসাইট হ্যাক করেছেন।',
-    icon: '💻',
-    xpReward: 25,
-    isUnlocked: false,
-  },
-  {
-    id: 'ach-feedback',
-    title: 'Critic of the Year',
-    titleBn: 'বছরের সেরা সমালোচক',
-    desc: 'Submitted an official review or feature request.',
-    descBn: 'ফালতু ওয়েবসাইট নিয়ে মতামত বা নতুন ফিচার রিকোয়েস্ট দিয়েছেন।',
-    icon: '⭐',
-    xpReward: 50,
-    isUnlocked: false,
-  },
-  {
-    id: 'ach-canvas',
-    title: 'Canvas Triad Master',
-    titleBn: 'ক্যানভাস ট্রায়াড মাস্টার',
-    desc: 'Inspected 2,500 PixiJS thoughts, Konva, and Fabric.',
-    descBn: 'পিক্সি জেএস ও কোনভা ক্যানভাস আর্ট এক্সপ্লোর করেছেন।',
-    icon: '🎨',
-    xpReward: 40,
-    isUnlocked: false,
-  },
-  {
-    id: 'ach-halftone',
-    title: 'Halftone Matrix Pioneer',
-    titleBn: 'হাফটোন ডট রূপকার',
-    desc: 'Generated custom halftone dotted or retro cinematic art with Python engine.',
-    descBn: 'পাইথন ইঞ্জিন দিয়ে হাফটোন ডটেড বা রেট্রো সিনেমাটিক আর্ট তৈরি করেছেন।',
-    icon: '🖼️',
-    xpReward: 40,
-    isUnlocked: false,
-  },
-  {
-    id: 'ach-chaos',
-    title: 'Entropy Overlord',
-    titleBn: 'বিশৃঙ্খলার সম্রাট',
-    desc: 'Engaged the 30% Chaos Inversion engine.',
-    descBn: '৩০% ক্যাওস ইনভার্সন ইঞ্জিন চালিয়ে বাস্তবতা উল্টে দিয়েছেন।',
-    icon: '🌀',
-    xpReward: 30,
-    isUnlocked: false,
-  },
-];
+import { INITIAL_ACHIEVEMENTS } from './data/achievements';
 
 export default function App() {
   // Initial Boot Loading Screen
@@ -534,6 +443,14 @@ export default function App() {
             transition={{ duration: 0.25, ease: 'easeInOut' }}
             className="space-y-8"
           >
+            <Suspense
+              fallback={
+                <div className="glass" style={{ padding: 32, borderRadius: 'var(--r-card)' }} role="status" aria-live="polite">
+                  <span className="mono muted">Unpacking exhibit…</span>
+                  <div className="poly-skeleton" />
+                </div>
+              }
+            >
             {/* Dynamic Page Rendering */}
             {currentPage === 'home' && (
               <>
@@ -739,7 +656,7 @@ export default function App() {
             )}
 
             {currentPage === 'polyglot' && (
-              <PolyglotChaosLab onAwardXp={(gain) => handleGainXp(gain)} />
+              <PolyglotTools onAwardXp={(gain) => handleGainXp(gain)} />
             )}
 
             {currentPage === 'viral' && (
@@ -760,6 +677,7 @@ export default function App() {
                 />
               </div>
             )}
+            </Suspense>
           </motion.div>
         </AnimatePresence>
 

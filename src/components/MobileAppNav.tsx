@@ -72,7 +72,7 @@ export const MobileAppNav: React.FC<MobileAppNavProps> = ({
     { id: 'shop', label: 'Store', icon: ShoppingCart },
     { id: 'support', label: 'Support', icon: Headset },
     { id: 'records', label: 'Guinness', icon: Award },
-    { id: 'polyglot', label: 'Polyglot', icon: Globe },
+    { id: 'polyglot', label: 'Tools', icon: Globe },
   ];
 
   return (
