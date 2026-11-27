@@ -1,5 +1,205 @@
 @import "tailwindcss";
 
+/* ============ EDITORIAL TASTE TOKENS ============ */
+:root {
+  --neutral-0: #ffffff;
+  --neutral-100: #ededed;
+  --neutral-200: #d9d9d9;
+  --neutral-400: #a3a3a3;
+  --neutral-500: #737373;
+  --neutral-600: #525252;
+  --neutral-900: #151515;
+
+  --bg-base: #ededed;
+  --bg-lift: #d9d9d9;
+  --bg-card: #ffffff;
+  --tone-strong: #151515;
+  --tone-medium: rgba(21, 21, 21, 0.64);
+  --tone-faint: rgba(21, 21, 21, 0.16);
+  --text-muted: #737373;
+  --border-subtle: rgba(21, 21, 21, 0.12);
+
+  --light-16: rgba(237, 237, 237, 0.16);
+  --light-64: rgba(237, 237, 237, 0.64);
+  --light-100: #ededed;
+  --dark-16: rgba(21, 21, 21, 0.16);
+  --dark-64: rgba(21, 21, 21, 0.64);
+  --blur-glass: blur(16px);
+
+  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+
+  --r-button: 8px;
+  --r-card: 10px;
+  --r-case: 20px;
+  --r-full: 999px;
+
+  --container: 1280px;
+  --margin: 40px;
+  --gutter: 20px;
+  --section-pad: 96px;
+  --title-gap: 32px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-1: 200ms;
+  --dur-2: 450ms;
+  --dur-3: 800ms;
+  --dur-4: 1200ms;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --margin: 20px;
+    --gutter: 12px;
+    --section-pad: 64px;
+    --title-gap: 24px;
+  }
+}
+
+/* ============ BASE ============ */
+html { background: var(--bg-base); }
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-base);
+  color: var(--tone-strong);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 22px;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 { font-weight: 500; }
+
+:focus-visible {
+  outline: 2px solid var(--tone-strong);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 100001;
+  background: var(--tone-strong);
+  color: var(--light-100);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 10px 15px;
+  border-radius: var(--r-button);
+  transition: top var(--dur-1) var(--ease-out);
+}
+.skip-link:focus { top: 12px; }
+
+/* ============ TYPE ROLES ============ */
+.h0 { font-size: clamp(48px, 8vw, 96px); line-height: 0.95; letter-spacing: -0.04em; font-weight: 500; }
+.h1 { font-size: 48px; line-height: 48px; letter-spacing: -1.5px; font-weight: 500; }
+.h2 { font-size: 40px; line-height: 44px; letter-spacing: -1.5px; font-weight: 500; }
+.h3 { font-size: 32px; line-height: 36px; letter-spacing: -1px; font-weight: 500; }
+.h4 { font-size: 24px; line-height: 28px; letter-spacing: -0.75px; font-weight: 500; }
+.h6 { font-size: 17px; line-height: 24px; letter-spacing: -0.25px; font-weight: 500; }
+.body-m { font-size: 15px; line-height: 22px; }
+.muted { color: var(--text-muted); }
+.eyebrow, .mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ============ MUSEUM FRAME PRIMITIVES ============ */
+.container-x {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--margin);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 15px;
+  border-radius: var(--r-button);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out);
+}
+.btn:active { transform: scale(0.98); }
+.btn:disabled { background: var(--tone-faint); color: var(--text-muted); cursor: not-allowed; }
+.btn-primary { background: var(--tone-strong); color: var(--light-100); }
+.btn-primary:hover { background: var(--neutral-600); }
+.btn-ghost { background: transparent; color: var(--tone-strong); border: 1px solid var(--border-subtle); }
+.btn-ghost:hover { background: var(--bg-lift); }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: 25px;
+  padding: 0 10px;
+  border-radius: var(--r-full);
+  background: var(--tone-faint);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.card {
+  background: var(--bg-card);
+  border-radius: var(--r-card);
+  border: 1px solid var(--border-subtle);
+}
+
+.glass {
+  background: rgba(237, 237, 237, 0.72);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  border: 1px solid var(--border-subtle);
+}
+
+.hairline { border-top: 1px solid var(--border-subtle); }
+
+/* ============ EXHIBIT: chaos lives inside this frame only ============ */
+.exhibit {
+  position: relative;
+  border-radius: var(--r-card);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  padding: 10px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.exhibit-inner {
+  border-radius: 5px; /* nested: 10 − 5 gap */
+  overflow: hidden;
+  font-family: 'Comic Neue', cursive;
+}
+.exhibit-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 5px 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+/* ============ REVEAL (once) ============ */
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-out);
+}
+html.js .reveal.is-in { opacity: 1; transform: none; }
+
+/* ============ CHAOS KEYFRAMES (exhibits only) ============ */
 @keyframes marquee {
   0% { transform: translateX(100%); }
   100% { transform: translateX(-100%); }
@@ -22,13 +222,23 @@
   100% { transform: translate(0, 0) rotate(0deg); }
 }
 
-.earthquake-shake {
-  animation: earthquake 0.12s infinite;
+.earthquake-shake { animation: earthquake 0.12s infinite; }
+
+/* BUG FIX: class was used in App.tsx but never defined */
+.tilted-chaos {
+  transform: rotate(-2deg);
+  transform-origin: center top;
+  transition: transform var(--dur-2) var(--ease-out);
 }
 
-body {
-  font-family: 'Comic Neue', cursive, 'Comic Sans MS', sans-serif;
-  margin: 0;
-  padding: 0;
-  cursor: default;
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html.js .reveal { opacity: 1; transform: none; }
+  .earthquake-shake, .tilted-chaos { animation: none; transform: none; }
 }

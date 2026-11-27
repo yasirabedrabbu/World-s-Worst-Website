@@ -394,9 +394,9 @@ export default function App() {
       return 'bg-[#000080] text-yellow-300';
     }
     if (currentTheme === 'stealth') {
-      return 'bg-gray-900 text-gray-800';
+      return 'bg-gray-900 text-gray-400';
     }
-    return 'bg-[#ff00ff] text-lime-400';
+    return 'bg-[var(--bg-base)] text-[var(--tone-strong)]';
   };
 
   return (
@@ -478,11 +478,12 @@ export default function App() {
         onTriggerWarning={() => setShowWarningModal(true)}
         onTriggerFeedback={() => setShowFeedbackModal(true)}
         onTriggerGamification={() => setShowGamificationModal(true)}
+        onTriggerLoading={() => setIsLoading(true)}
         xp={xp}
       />
 
       {/* Main Content Viewport */}
-      <main className="max-w-6xl mx-auto p-2 sm:p-4 md:p-6 pb-28 md:pb-10">
+      <main id="main" className="max-w-6xl mx-auto p-2 sm:p-4 md:p-6 pb-28 md:pb-10">
         {/* Global Quick Action Toolbar */}
         <div className="flex flex-wrap items-center justify-between gap-2 bg-yellow-300 border-2 border-black p-2 mb-4 font-mono text-xs shadow-[3px_3px_0px_#000]">
           <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
@@ -932,7 +933,7 @@ export default function App() {
               />
             )}
         
-        
+
             {currentPage === 'polyglot' && (
               <PolyglotChaosLab onAwardXp={(gain) => handleGainXp(gain)} />
             )}
