@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PageType } from '../types';
 import { playSound } from '../utils/audioSynth';
-import { Flame, ShoppingCart, Headset, UserX, Award, Home, Wifi, PhoneCall, Pin, AlertTriangle, MessageSquare, Trophy, Newspaper, Camera, RotateCcw } from 'lucide-react';
+import { Flame, ShoppingCart, Headset, UserX, Award, Home, Wifi, PhoneCall, Pin, AlertTriangle, MessageSquare, Trophy, Newspaper, Camera, RotateCcw, Globe } from 'lucide-react';
 
 interface WorstNavProps {
   currentPage: PageType;
@@ -46,6 +46,7 @@ export const WorstNav: React.FC<WorstNavProps> = ({
     { id: 'support', label: '🎧 KAREN BOT SUPPORT', icon: <Headset className="w-3.5 h-3.5" />, badSub: 'Queue: #9,842' },
     { id: 'unsubscribe', label: '🛑 UNSUBSCRIBE MAZE', icon: <UserX className="w-3.5 h-3.5" />, badSub: 'You Cannot Leave' },
     { id: 'records', label: '🏆 GUINNESS HALL', icon: <Award className="w-3.5 h-3.5" />, badSub: 'All 10 Atrocities' },
+    { id: 'polyglot', label: '🌐 POLYGLOT LAB', icon: <Globe className="w-3.5 h-3.5" />, badSub: '16 Langs, 0 Correct' },
   ];
 
   function onTriggerLoading() {

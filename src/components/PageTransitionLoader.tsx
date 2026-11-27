@@ -17,6 +17,7 @@ const PAGE_NAMES: Record<PageType, string> = {
   support: 'KAREN BOT SUPPORT (কিউ নং ৯,৮৪২)',
   unsubscribe: 'UNSUBSCRIBE MAZE (পালাতে পারবেন না)',
   records: 'GUINNESS HALL (১০টি চরম নিষ্ঠুর স্তম্ভ)',
+  polyglot: 'POLYGLOT CHAOS LAB (১৬টি ভাষা, ০টি সঠিক)',
 };
 
 export const PageTransitionLoader: React.FC<PageTransitionLoaderProps> = ({

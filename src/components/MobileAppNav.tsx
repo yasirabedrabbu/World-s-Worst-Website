@@ -24,6 +24,7 @@ import {
   Newspaper,
   Camera,
   RotateCcw,
+  Globe,
 } from 'lucide-react';
 
 interface MobileAppNavProps {
@@ -71,6 +72,7 @@ export const MobileAppNav: React.FC<MobileAppNavProps> = ({
     { id: 'shop', label: 'Store', icon: ShoppingCart },
     { id: 'support', label: 'Support', icon: Headset },
     { id: 'records', label: 'Guinness', icon: Award },
+    { id: 'polyglot', label: 'Polyglot', icon: Globe },
   ];
 
   return (
@@ -131,7 +133,7 @@ export const MobileAppNav: React.FC<MobileAppNavProps> = ({
       <nav className="md:hidden fixed bottom-3 inset-x-3 z-[9995] select-none">
         <div className="backdrop-blur-2xl bg-neutral-950/85 border border-white/15 rounded-2xl p-1.5 shadow-[0_12px_35px_rgba(0,0,0,0.8)] flex items-center justify-between">
           {/* Main App Navigation Tabs */}
-          <div className="flex items-center justify-around flex-1">
+          <div className="flex items-center justify-around flex-1 overflow-x-auto gap-0.5">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = currentPage === tab.id;
@@ -266,7 +268,7 @@ export const MobileAppNav: React.FC<MobileAppNavProps> = ({
                   >
                     <MessageSquare className="w-5 h-5 text-cyan-300" />
                     <span className="font-bold text-cyan-300">মতামত / Feedback</span>
-                    <span className="text-[9px] text-gray-300">রিভিউ ও ফিচার রিকোয়েস্ট</span>
+                    <span className="text-[9px] text-gray-300">রিভিউ ও ফিচার রিকোয়েস্ট</span>
                   </button>
                 )}
 
@@ -280,7 +282,7 @@ export const MobileAppNav: React.FC<MobileAppNavProps> = ({
                   >
                     <Trophy className="w-5 h-5 text-lime-400" />
                     <span className="font-bold text-lime-300">গেমিফিকেশন ({xp} XP)</span>
-                    <span className="text-[9px] text-gray-300">কষ্টের কোয়েস্ট ও ব্যাজ</span>
+                    <span className="text-[9px] text-gray-300">কষ্টের কোয়েস্ট ও ব্যাজ</span>
                   </button>
                 )}
 

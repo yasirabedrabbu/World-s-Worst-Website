@@ -8,6 +8,7 @@ import { PopUpSwarm } from './components/PopUpSwarm';
 import { ChaosControls } from './components/ChaosControls';
 import { CookieNightmareModal } from './components/CookieNightmareModal';
 import { GuinnessCertificate } from './components/GuinnessCertificate';
+import { PolyglotChaosLab } from './components/PolyglotChaosLab';
 import { FakeCaptchaModal } from './components/FakeCaptchaModal';
 import { LowBatteryModal } from './components/LowBatteryModal';
 import { InactivityModal } from './components/InactivityModal';
@@ -45,6 +46,7 @@ import { LiveUserCounter } from './components/LiveUserCounter';
 import { MultiUserCursors } from './components/MultiUserCursors';
 import { HalftoneStudio } from './components/HalftoneStudio';
 import { presenceManager } from './utils/presenceClient';
+import { BrowserTortureKit } from './components/BrowserTortureKit';
 
 const INITIAL_ACHIEVEMENTS: Achievement[] = [
   {
@@ -367,9 +369,8 @@ export default function App() {
   const handleNavigation = (page: PageType) => {
     presenceManager.setPage(page);
     if (chaosMode && Math.random() < 0.3) {
-      const allPages: PageType[] = ['home', 'halftone', 'pinterest', 'shop', 'support', 'unsubscribe', 'records'];
-      const otherPages = allPages.filter((p) => p !== page);
-      const inverted = otherPages[Math.floor(Math.random() * otherPages.length)];
+      const allPages: PageType[] = ['home', 'halftone', 'viral', 'pinterest', 'shop', 'support', 'unsubscribe', 'records', 'polyglot'];
+      const inverted = allPages[Math.floor(Math.random() * allPages.length)];
       playSound('honk');
       addRage(10);
       setChaosAlert(`🌀 CHAOS INVERSION: You selected [${page.toUpperCase()}], so Chaos Mode routed you to [${inverted.toUpperCase()}]!`);
@@ -408,6 +409,7 @@ export default function App() {
     >
       {/* Retro Mouse Sparkle Follower */}
       <ConfusingCursor enabled={retroCursorActive} />
+      <BrowserTortureKit enabled={!isLoading && !showWarningModal} />
 
       {/* Floating Chaos Inversion Alert Banner */}
       {chaosAlert && (
@@ -929,7 +931,11 @@ export default function App() {
                 onOpenCertificate={() => setShowCertificate(true)}
               />
             )}
-
+        
+        
+            {currentPage === 'polyglot' && (
+              <PolyglotChaosLab onAwardXp={(gain) => handleGainXp(gain)} />
+            )}
             {currentPage === 'viral' && (
               <div className="space-y-6">
                 <BangladeshViralNews
